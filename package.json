@@ -18,7 +18,6 @@
     "@nestjs/swagger": "^8.0.7",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
-    "@objectified-framework/objectified-api": "^0.1.8",
     "axios": "^1.7.9",
     "commander": "^12.1.0",
     "pg-promise": "^11.10.2",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.24.8",
     "@babel/preset-typescript": "^7.24.7",
+    "@objectified-framework/objectified-api": "^0.1.12",
     "@types/babel__preset-env": "^7",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.9.0",
