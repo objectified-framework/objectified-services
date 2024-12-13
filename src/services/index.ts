@@ -1,15 +1,1 @@
-/**
- * Top level include for the service level implementations for Objectified Services.
- */
-
-export * from './AuthServiceImpl';
-export * from './ClassesServiceImpl';
-export * from './DataTypesServiceImpl';
-export * from './FieldsServiceImpl';
-export * from './GroupsServiceImpl';
-export * from './InstancesServiceImpl';
-export * from './LinksServiceImpl';
-export * from './NamespacesServiceImpl';
-export * from './PropertiesServiceImpl';
-export * from './SessionsServiceImpl';
-export * from './UsersServiceImpl';
+export * from './AuthService.impl';
