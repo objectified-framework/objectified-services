@@ -18,7 +18,7 @@ info:
     url: https://github.com/objectified-framework
     email: ksuenobu@fastmail.com
 servers:
-  - url: http://api.objectified.wiki/v1
+  - url: https://api.objectified.wiki/v1
 tags:
   - name: Auth
     description: |
@@ -27,6 +27,11 @@ tags:
       information provided by the third party authenticators are stored in the users' associated
       accounts, or in session variables as necessary.  Remaining information such as a user's
       name, or account settings are stored in Objectified through other services.
+  - name: Session
+    description: |
+      Session management for active users, which stores information regarding a user's interactions
+      in the system through a database.  Session variables are programmatically available, and are
+      not stored on the browser other than through access via the JWT.
 paths:
   /auth:
     post:
@@ -57,6 +62,54 @@ paths:
           description: Unauthorized
         '403':
           description: Access forbidden
+  /session:
+    get:
+      tags:
+        - Session
+      summary: Session retrieval service
+      operationId: getSession
+      description: |
+        Retrieves the currently active session for the user specified by their JWT token.
+      security:
+        - JWT: []
+      responses:
+        '200':
+          description: The user session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+    post:
+      tags:
+        - Session
+      summary: Stores session data
+      operationId: postSession
+      description: |
+        Stores session data.
+      security:
+        - JWT: []
+      requestBody:
+        description: The session data to store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Session'
+      responses:
+        '201':
+          description: No content
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Access forbidden
+        '404':
+          description: Not found
 components:
   securitySchemes:
     JWT:
@@ -68,9 +121,11 @@ components:
     Login:
       type: object
       x-schema: obj
+      x-no-dao: true
       required:
         - username
-        - password
+        - source
+        - jwt
       description: Login credentials input
       properties:
         emailAddress:
@@ -83,3 +138,19 @@ components:
             - gitlab
             - azure
           description: Source of the account login.
+        jwt:
+          type: string
+          description: Encoded web token
+    Session:
+      type: object
+      x-no-dao: true
+      description: Session object
+      required:
+        - data
+      properties:
+        jwt:
+          type: string
+          description: The session JWT.
+        data:
+          type: object
+          description: The session data.
