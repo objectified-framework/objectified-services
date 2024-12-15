@@ -11,4 +11,7 @@ export class SessionServiceImpl implements SessionService {
     return Promise.resolve(undefined);
   }
 
+  deleteSession(request: Request): Promise<ServiceResponse<null>> {
+    return Promise.resolve(undefined);
+  }
 }
