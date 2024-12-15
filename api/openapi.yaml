@@ -141,7 +141,6 @@ components:
     Login:
       type: object
       x-schema: obj
-      x-no-dao: true
       required:
         - username
         - source
@@ -163,7 +162,6 @@ components:
           description: Encoded web token
     Session:
       type: object
-      x-no-dao: true
       description: Session object
       required:
         - data
